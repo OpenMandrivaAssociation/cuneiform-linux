@@ -2,7 +2,6 @@
 
 %define	version	1.0.0
 %define	release	%mkrel 1
-%define distsuffix edm
 
 Name:		cuneiform-linux
 Summary:	An OCR system
@@ -48,4 +47,3 @@ rm -rf %{buildroot}
 %{_includedir}/cuneiform.h
 %{_libdir}/*.so
 %{_libdir}/*.so.%{version}
-
