@@ -1,7 +1,10 @@
-%define Werror_cflags %nil
+#define Werror_cflags %nil
 
-%define	version	1.0.0
+%define	version	1.1.0
 %define	release	%mkrel 1
+%define major 0
+%define libname %mklibname cuneiform %{major}
+%define develname %mklibname cuneiform -d
 
 Name:		cuneiform-linux
 Summary:	An OCR system
@@ -10,9 +13,9 @@ Release:	%{release}
 License:	BSD
 URL:		https://launchpad.net/cuneiform-linux
 Group:		Text tools
-Source0:	%{name}-%{version}.tar.bz2.tar
+Source0:	%{name}-%{version}.tar.bz2
 BuildRequires:	cmake
-BuildRequires:	ImageMagick
+BuildRequires:	ImageMagick-devel
 Suggests:	cuneiform-qt yagf
 
 %description
@@ -21,6 +24,26 @@ and open sourced by Cognitive Technologies. Cuneiform was
 originally a Windows program, which was ported to Linux
 by Jussi Pakkanen.
 
+%package -n %{libname}
+Summary:	Cuneiform OCR system shared libraries
+
+%description -n %{libname}
+Cuneiform is an multi-language OCR system originally developed
+and open sourced by Cognitive Technologies. Cuneiform was
+originally a Windows program, which was ported to Linux
+by Jussi Pakkanen.
+
+%package -n %{develname}
+Summary:        Cuneiform development files
+Requires:	%{libname} = %{EVRD}
+
+%description -n %{develname}
+Cuneiform is an multi-language OCR system originally developed
+and open sourced by Cognitive Technologies. Cuneiform was
+originally a Windows program, which was ported to Linux
+by Jussi Pakkanen.
+
+This package contains files required only for development purpose.
 
 %prep
 
@@ -34,7 +57,6 @@ by Jussi Pakkanen.
 rm -rf %{buildroot}
 cd build
 %makeinstall_std
-export DONT_FIX_EOL=1
 
 %clean
 rm -rf %{buildroot}
@@ -44,6 +66,11 @@ rm -rf %{buildroot}
 %doc issues.txt *readme.rtf readme.txt
 %{_bindir}/cuneiform
 %{_datadir}/cuneiform/*.dat
-%{_includedir}/cuneiform.h
-%{_libdir}/*.so
+
+%files -n %{libname}
+%{_libdir}/*.so.%{major}*
 %{_libdir}/*.so.%{version}
+
+%files -n %{develname}
+%{_libdir}/*.so
+%{_includedir}/cuneiform.h
