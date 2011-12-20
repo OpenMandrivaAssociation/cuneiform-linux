@@ -1,10 +1,8 @@
-#define Werror_cflags %nil
-
-%define	version	1.1.0
-%define	release	%mkrel 1
-%define major 0
-%define libname %mklibname cuneiform %{major}
-%define develname %mklibname cuneiform -d
+%define	version		1.1.0
+%define	release		%mkrel 1
+%define abi		0
+%define libname		%mklibname cuneiform %{abi}
+%define develname	%mklibname cuneiform -d
 
 Name:		cuneiform-linux
 Summary:	An OCR system
@@ -26,6 +24,7 @@ by Jussi Pakkanen.
 
 %package -n %{libname}
 Summary:	Cuneiform OCR system shared libraries
+Group:		System/Libraries
 
 %description -n %{libname}
 Cuneiform is an multi-language OCR system originally developed
@@ -34,8 +33,10 @@ originally a Windows program, which was ported to Linux
 by Jussi Pakkanen.
 
 %package -n %{develname}
-Summary:        Cuneiform development files
+Summary:	Cuneiform development files
+Group:		Development/C++
 Requires:	%{libname} = %{EVRD}
+Requires:	ImageMagick-devel
 
 %description -n %{develname}
 Cuneiform is an multi-language OCR system originally developed
@@ -68,7 +69,7 @@ rm -rf %{buildroot}
 %{_datadir}/cuneiform/*.dat
 
 %files -n %{libname}
-%{_libdir}/*.so.%{major}*
+%{_libdir}/*.so.%{abi}*
 %{_libdir}/*.so.%{version}
 
 %files -n %{develname}
