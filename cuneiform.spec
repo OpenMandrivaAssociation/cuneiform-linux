@@ -1,8 +1,11 @@
 %define	version		1.1.0
-%define	release		%mkrel 1
+%define	release		%mkrel 2
 %define abi		0
 %define libname		%mklibname cuneiform %{abi}
 %define develname	%mklibname cuneiform -d
+
+# datafiles must have DOS-style EOL
+%define dont_fix_eol	1
 
 Name:		cuneiform-linux
 Summary:	An OCR system
