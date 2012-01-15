@@ -17,7 +17,7 @@ Group:		Text tools
 Source0:	%{name}-%{version}.tar.bz2
 BuildRequires:	cmake
 BuildRequires:	ImageMagick-devel
-Suggests:	cuneiform-qt yagf
+#Suggests:	cuneiform-qt yagf
 
 %description
 Cuneiform is an multi-language OCR system originally developed
