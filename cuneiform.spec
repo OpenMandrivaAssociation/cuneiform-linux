@@ -1,5 +1,5 @@
 %define	version		1.1.0
-%define	release		%mkrel 2
+%define release		3
 %define abi		0
 %define libname		%mklibname cuneiform %{abi}
 %define develname	%mklibname cuneiform -d
